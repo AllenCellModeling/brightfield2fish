@@ -1,0 +1,33 @@
+name: bright2fish
+channels:
+  - pytorch
+  - conda-forge
+  - bioconda
+dependencies:
+  - altair
+  - codecov
+  - conda-build
+  - coverage
+  - dca
+  - ignite
+  - ipython
+  - jupyterlab
+  - matplotlib
+  - natsort
+  - numba
+  - numpy
+  - pandas
+  - pre_commit
+  - pytest
+  - pytest-cov
+  - python=3.6
+  - pytorch
+  - scanpy
+  - scikit-learn=0.20.2
+  - scipy
+  - sphinx
+  - sphinx_rtd_theme
+  - torchvision
+  - tqdm
+  - pip:
+    - aicsimageio
