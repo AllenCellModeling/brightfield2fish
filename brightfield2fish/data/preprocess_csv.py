@@ -19,7 +19,9 @@ def find_czis(df):
     czis = [[os.path.join(k, f) for f in v] for k, v in czis.items()]
     czis = [item for sublist in czis for item in sublist]
     df_czi = pd.DataFrame([{**parse_plate_well(czi), "file": czi} for czi in czis])
-    return df.merge(df_czi, how="inner")
+    df = df.merge(df_czi, how="inner")
+    df = df[~df["file"].str.contains("FORFUN")]
+    return df
 
 
 def image_shape(czi_path):
