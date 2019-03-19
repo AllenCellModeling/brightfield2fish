@@ -7,7 +7,7 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
-from .utils import prep_fish
+from utils import prep_fish
 
 from aicsimageio import AICSImage, OmeTifWriter
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     preprocessed_par_dir = "/allen/aics/modeling/data/brightfield2fish/preprocessed"
     preprocessed_im_dir = os.path.join(preprocessed_par_dir, "images")
 
-    df = pd.read_csv("../brightfield2fish/data/data_by_channels.csv")
+    df = pd.read_csv("data_by_channels.csv")
     df["normalized_single_channel_image"] = (
         preprocessed_im_dir
         + os.path.sep
