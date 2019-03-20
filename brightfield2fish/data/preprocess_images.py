@@ -1,8 +1,6 @@
 """
-This module/script takes the raw czi images and normalizes each channel,
-and saves each channel of each image to a single channel ZYX tiff file in
-/allen/aics/modeling/data/brightfield2fish/preprocessed.
-The df it needs as input is created by preprocess_csv.py.
+This module/script takes the preprocessed images from preprocess_images.py
+and saves pickled float versions of the normalized single channel 3D images.
 """
 
 import os

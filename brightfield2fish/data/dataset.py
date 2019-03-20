@@ -2,7 +2,7 @@ import warnings
 import numpy as np
 from torch.utils.data import Dataset
 from aicsimageio import AICSImage
-from .utils import normalize_image_zero_one, normalize_image_center_scale
+from .utils import normalize_image_zero_one, normalize_image_center_scale, RandomCrop3D
 
 
 class FishDataframeDatasetCZI(Dataset):
@@ -12,6 +12,7 @@ class FishDataframeDatasetCZI(Dataset):
         self,
         df,
         channel_content="DNA",
+        random_crop=None,
         normalize=False,
         math_dtype=np.float64,
         out_dtype=np.float32,
@@ -24,6 +25,8 @@ class FishDataframeDatasetCZI(Dataset):
         self.df = df[df["channel_content"] == channel_content].reset_index(drop=True)[
             ["file", "channel_index"]
         ]
+
+        self._random_crop = random_crop
         self._normalize = normalize
         self._math_dtype = math_dtype
         self._out_dtype = out_dtype
@@ -43,6 +46,13 @@ class FishDataframeDatasetCZI(Dataset):
         if self._normalize:
             bright = normalize_image_center_scale(bright.astype(self._math_dtype))
             target = normalize_image_zero_one(target.astype(self._math_dtype))
+        if self._random_crop is not None:
+            z_size, y_size, x_size = self._random_crop
+            randomcropper = RandomCrop3D(
+                bright, z_size=z_size, y_size=y_size, x_size=x_size
+            )
+            bright = randomcropper.crop(bright)
+            target = randomcropper.crop(target)
         return {
             "Brightfield": bright.astype(self._out_dtype),
             "Target": target.astype(self._out_dtype),
@@ -53,7 +63,12 @@ class FishDataframeDatasetTIFF(Dataset):
     """Dataset class for Brghtfield -> FISH prediction that reads single channel tiffs"""
 
     def __init__(
-        self, df, channel_content="DNA", math_dtype=np.float64, out_dtype=np.float32
+        self,
+        df,
+        channel_content="DNA",
+        random_crop=None,
+        math_dtype=np.float64,
+        out_dtype=np.float32,
     ):
         """
         Args:
@@ -80,6 +95,7 @@ class FishDataframeDatasetTIFF(Dataset):
             ["Brightfield", "Target"]
         ].reset_index(drop=True)
 
+        self._random_crop = random_crop
         self._math_dtype = math_dtype
         self._out_dtype = out_dtype
 
@@ -94,6 +110,13 @@ class FishDataframeDatasetTIFF(Dataset):
             target = AICSImage(row["Target"]).get_image_data("ZYX")
         bright = normalize_image_center_scale(bright.astype(self._math_dtype))
         target = normalize_image_zero_one(target.astype(self._math_dtype))
+        if self._random_crop is not None:
+            z_size, y_size, x_size = self._random_crop
+            randomcropper = RandomCrop3D(
+                bright, z_size=z_size, y_size=y_size, x_size=x_size
+            )
+            bright = randomcropper.crop(bright)
+            target = randomcropper.crop(target)
         return {
             "Brightfield": bright.astype(self._out_dtype),
             "Target": target.astype(self._out_dtype),

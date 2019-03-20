@@ -1,3 +1,4 @@
+import random
 import numpy as np
 from functools import partial
 from PIL import Image
@@ -58,3 +59,24 @@ def plot_prepped(img3d, reduce_3D_to_2D=partial(np.percentile, q=100, axis=0)):
     img2d = reduce_3D_to_2D(img3d)
     img2d = float_to_uint(img2d)
     return Image.fromarray(img2d, "L")
+
+
+def get_random_crop_3D(array, z_size, y_size, x_size):
+    i = random.randint(0, array.shape[0] - z_size)
+    j = random.randint(0, array.shape[1] - y_size)
+    k = random.randint(0, array.shape[2] - x_size)
+    return ((i, i + z_size), (j, j + y_size), (k, k + x_size))
+
+
+def perform_crop_3D(array, z_lims, y_lims, x_lims):
+    return array[z_lims[0] : z_lims[1], y_lims[0] : y_lims[1], x_lims[0] : x_lims[1]]
+
+
+class RandomCrop3D:
+    def __init__(self, array, z_size, y_size, x_size):
+        self.zlims, self.ylims, self.xlims = get_random_crop_3D(
+            array, z_size, y_size, x_size
+        )
+
+    def crop(self, X):
+        return perform_crop_3D(X, self.zlims, self.ylims, self.xlims)
