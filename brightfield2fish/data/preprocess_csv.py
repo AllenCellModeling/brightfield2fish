@@ -1,3 +1,8 @@
+"""
+This module/script takes the csv of image directories, finds all the czi images worth finding,
+and creates csvs indexing all the images and the content of each image channel.
+"""
+
 import os
 import warnings
 import concurrent
