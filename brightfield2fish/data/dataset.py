@@ -1,66 +1,15 @@
 import warnings
 import numpy as np
+import torch
 from torch.utils.data import Dataset
 from aicsimageio import AICSImage
-from .utils import normalize_image_zero_one, normalize_image_center_scale, RandomCrop3D
-
-
-class FishDataframeDatasetCZI(Dataset):
-    """Dataset class for Brghtfield -> FISH prediction that reads multi-channel czis"""
-
-    def __init__(
-        self,
-        df,
-        channel_content="DNA",
-        random_crop=None,
-        normalize=False,
-        math_dtype=np.float64,
-        out_dtype=np.float32,
-    ):
-        """
-        Args:
-            df (pandas.DataFrame): data_by_channels.csv dataframe output by preprocess_csv.py
-            channel_content (str): Name of the probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
-        """
-        self.df = df[df["channel_content"] == channel_content].reset_index(drop=True)[
-            ["file", "channel_index"]
-        ]
-
-        self._random_crop = random_crop
-        self._normalize = normalize
-        self._math_dtype = math_dtype
-        self._out_dtype = out_dtype
-
-    def __len__(self):
-        return len(self.df)
-
-    def __getitem__(self, idx):
-        row = self.df.iloc[idx]
-        brightfield_channel_index = 0
-        target_channel_index = row["channel_index"]
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore", category=FutureWarning)
-            image = AICSImage(row["file"])
-        bright = image.get_image_data("ZYX", T=0, C=brightfield_channel_index)
-        target = image.get_image_data("ZYX", T=0, C=target_channel_index)
-        if self._normalize:
-            bright = normalize_image_center_scale(bright.astype(self._math_dtype))
-            target = normalize_image_zero_one(target.astype(self._math_dtype))
-        if self._random_crop is not None:
-            z_size, y_size, x_size = self._random_crop
-            randomcropper = RandomCrop3D(
-                bright, z_size=z_size, y_size=y_size, x_size=x_size
-            )
-            bright = randomcropper.crop(bright)
-            target = randomcropper.crop(target)
-        return {
-            "Brightfield": bright.astype(self._out_dtype),
-            "Target": target.astype(self._out_dtype),
-        }
+from .utils import RandomCrop3D, normalize
 
 
 class FishDataframeDatasetTIFF(Dataset):
-    """Dataset class for Brghtfield -> FISH prediction that reads single channel tiffs"""
+    """
+    Dataset class for Brghtfield -> FISH prediction that reads single channel tiffs.
+    """
 
     def __init__(
         self,
@@ -69,20 +18,25 @@ class FishDataframeDatasetTIFF(Dataset):
         random_crop=None,
         math_dtype=np.float64,
         out_dtype=np.float32,
+        output_torch=True,
+        channel_dim=True,
+        return_tuple=True,
     ):
         """
         Args:
             df (pandas.DataFrame): data_by_channels.csv dataframe output by preprocess_csv.py
-            channel_content (str): Name of the probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
+            channel_content (str): Name of the ll probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
         """
 
         df_channel = df[df["channel_content"] == channel_content].reset_index(
             drop=True
         )[["file", "normalized_single_channel_image"]]
+
         df_brightf = df[
             (df["channel_content"] == "Brightfield")
             & (df["file"].isin(df_channel["file"]))
         ].reset_index(drop=True)[["file", "normalized_single_channel_image"]]
+
         df_channel.rename(
             {"normalized_single_channel_image": "Target"}, axis="columns", inplace=True
         )
@@ -91,6 +45,7 @@ class FishDataframeDatasetTIFF(Dataset):
             axis="columns",
             inplace=True,
         )
+
         self.df = df_brightf.merge(df_channel, how="inner", on="file")[
             ["Brightfield", "Target"]
         ].reset_index(drop=True)
@@ -98,26 +53,40 @@ class FishDataframeDatasetTIFF(Dataset):
         self._random_crop = random_crop
         self._math_dtype = math_dtype
         self._out_dtype = out_dtype
+        self._output_torch = output_torch
+        self._channel_dim = channel_dim
+        self._return_tuple = return_tuple
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, idx):
+
         row = self.df.iloc[idx]
+
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=FutureWarning)
-            bright = AICSImage(row["Brightfield"]).get_image_data("ZYX")
-            target = AICSImage(row["Target"]).get_image_data("ZYX")
-        bright = normalize_image_center_scale(bright.astype(self._math_dtype))
-        target = normalize_image_zero_one(target.astype(self._math_dtype))
-        if self._random_crop is not None:
-            z_size, y_size, x_size = self._random_crop
-            randomcropper = RandomCrop3D(
-                bright, z_size=z_size, y_size=y_size, x_size=x_size
-            )
-            bright = randomcropper.crop(bright)
-            target = randomcropper.crop(target)
-        return {
-            "Brightfield": bright.astype(self._out_dtype),
-            "Target": target.astype(self._out_dtype),
+            out = {
+                k: AICSImage(row[k]).get_image_data("ZYX")
+                for k in ("Brightfield", "Target")
+            }
+
+        out = {
+            k: normalize(v.astype(self._math_dtype), content=k).astype(self._out_dtype)
+            for k, v in out.items()
         }
+
+        if self._random_crop is not None:
+            randomcropper = RandomCrop3D(out["Brightfield"], *self._random_crop)
+            out = {k: randomcropper.crop(v) for k, v in out.items()}
+
+        if self._output_torch:
+            out = {k: torch.from_numpy(v) for k, v in out.items()}
+
+        if self._channel_dim:
+            out = {k: torch.unsqueeze(v, 0) for k, v in out.items()}
+
+        if self._return_tuple:
+            out = (out["Brightfield"], out["Target"])
+
+        return out

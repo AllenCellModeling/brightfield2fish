@@ -14,9 +14,17 @@ def normalize_image_zero_one(im):
 
 def normalize_image_center_scale(im):
     """im is a np array"""
-    im -= np.mean(im)
-    im /= np.std(im)
+    im = im - np.mean(im)
+    im = im / np.std(im)
     return im
+
+
+def normalize(im, content="Brightfield"):
+    return (
+        normalize_image_center_scale(im)
+        if content is "Brightfield"
+        else normalize_image_zero_one(im)
+    )
 
 
 def float_to_uint(im, uint_dtype=np.uint8):
