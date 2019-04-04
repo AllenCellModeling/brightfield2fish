@@ -1,6 +1,6 @@
 """
-This module/script takes the preprocessed images from preprocess_images.py
-and saves pickled float versions of the normalized single channel 3D images.
+This module/script takes a df from the data_by_images.csv from preprocess_csv.py
+and saves normalized versions of each single channel 3D image, along with a csv index.
 """
 
 import os
