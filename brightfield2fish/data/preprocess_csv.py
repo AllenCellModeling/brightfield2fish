@@ -50,6 +50,11 @@ if __name__ == "__main__":
     df["plate"] = df["plate"].astype(str)
     df = df.replace({"PRSS35": "PRSS3", "COL2A": "COL2A1"})
 
+    # add CAAX signal to channel info:
+    for i, row in df.iterrows():
+        if row["cell_line"] == "CAAX":
+            df.loc[i, "probe_561"] = "CAAX"
+
     # find the actual czis and filter for ones that are the right shape
     df = find_czis(df)
     df = filter_czis(df)
