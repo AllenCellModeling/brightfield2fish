@@ -5,7 +5,8 @@ exclude =
     __pycache__,
     docs/source/conf.py,
     build
-ignore =
+    .ipynb_checkpoints
+extend_ignore =
     E501, # max line length
     W503, # breaking before binary operators
     E302, # multi-line empty space / comments bug
