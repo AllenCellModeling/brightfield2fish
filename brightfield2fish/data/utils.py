@@ -22,7 +22,7 @@ def normalize_image_center_scale(im):
 def normalize(im, content="Brightfield"):
     return (
         normalize_image_center_scale(im)
-        if content is "Brightfield"
+        if content == "Brightfield"
         else normalize_image_zero_one(im)
     )
 
