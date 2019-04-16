@@ -29,6 +29,7 @@ Installation
     $ cd brightfield2fish/
     $ pip install -e .[test]
     $ pip install -e .[dev]
+    $ pre-commit install
 
 Features
 --------
