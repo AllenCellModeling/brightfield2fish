@@ -21,5 +21,4 @@ def test_value_change():
     #
     example = Example(start_val)
     example.update_value(new_val)
-    assert (example.get_value() == new_val and
-            example.get_previous_value() == start_val)
+    assert example.get_value() == new_val and example.get_previous_value() == start_val

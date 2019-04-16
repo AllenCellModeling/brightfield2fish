@@ -11,7 +11,6 @@ log = logging.getLogger(__name__)
 
 
 class Example(object):
-
     def __init__(self, init_value: int = 10):
         self.current_value = init_value
         self.old_value = 0
@@ -24,7 +23,9 @@ class Example(object):
         """
         self.old_value = self.current_value
         self.current_value = new_value
-        log.info("Updating value from {} to {}".format(self.old_value, self.current_value))
+        log.info(
+            "Updating value from {} to {}".format(self.old_value, self.current_value)
+        )
         return self.old_value
 
     def get_value(self):
