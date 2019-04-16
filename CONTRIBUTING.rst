@@ -93,12 +93,12 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
 
     $ git clone git@github.com:your_name_here/brightfield2fish.git
 
-3. Install your local copy into a virtualenv (or anaconda environment). Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into an anaconda environment (or virtualenv). Assuming you have `anaconda` installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv brightfield2fish
+    $ conda create --name brightfield2fish python=3.6
     $ cd brightfield2fish/
-    $ pip install -r requirements_dev.txt
-    $ pip install -e .
+    $ pip install -e .[test]
+    $ pip install -e .[dev]
 
 4. Create a branch for local development::
 
@@ -109,10 +109,9 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
 5. When you're done making changes, check that your changes pass flake8 and the
    tests, including testing other Python versions with tox::
 
+    $ black brightfield2fish
     $ flake8 brightfield2fish
     $ make test-all
-
-   To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
