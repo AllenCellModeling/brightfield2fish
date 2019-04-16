@@ -25,6 +25,8 @@ translate brightfield images to and from FISH assay
 Installation
 ------------
 
+::
+
     $ conda create --name brightfield2fish python=3.6
     $ cd brightfield2fish/
     $ pip install -e .[test]
