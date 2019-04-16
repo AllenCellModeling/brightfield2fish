@@ -99,6 +99,7 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
     $ cd brightfield2fish/
     $ pip install -e .[test]
     $ pip install -e .[dev]
+    $ pre-commit install
 
 4. Create a branch for local development::
 
@@ -106,11 +107,9 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass flake8 and the
+5. When you're done making changes, check that your changes pass the
    tests, including testing other Python versions with tox::
 
-    $ black brightfield2fish
-    $ flake8 brightfield2fish
     $ make test-all
 
 6. Commit your changes and push your branch to GitHub::
@@ -118,6 +117,8 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
     $ git add .
     $ git commit -m "Resolves gh-###. Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
+
+   `black` (a formatter) and `flake8` (a linter) should run as pre-commit hooks, and will prevent the code from being commited until it passes these standards. You may need to edit you code and `git add` it again until it passes and the commit is logged.
 
 7. Submit a pull request through the GitHub website.
 
