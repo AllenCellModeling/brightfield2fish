@@ -29,6 +29,7 @@ test_requirements = [
     "wheel>=0.33.1",
     "watchdog>=0.9.0",
     "flake8>=3.7.7",
+    "black>=19.3b0",
     "tox>=3.5.2",
     "coverage>=5.0a4",
     "Sphinx>=2.0.0b1",

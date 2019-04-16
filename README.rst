@@ -7,7 +7,7 @@ brightfield2fish
         :target: https://pypi.python.org/pypi/brightfield2fish
 
 .. image:: https://img.shields.io/travis/AllenCellModeling/brightfield2fish.svg
-        :target: https://travis-ci.org/AllenCellModeling/brightfield2fish
+        :target: https://travis-ci.com/AllenCellModeling/brightfield2fish
 
 .. image:: https://readthedocs.org/projects/brightfield2fish/badge/?version=latest
         :target: https://brightfield2fish.readthedocs.io/en/latest/?badge=latest
@@ -21,6 +21,14 @@ translate brightfield images to and from FISH assay
 
 * Documentation: https://brightfield2fish.readthedocs.io.
 
+
+Installation
+------------
+
+    $ conda create --name brightfield2fish python=3.6
+    $ cd brightfield2fish/
+    $ pip install -e .[test]
+    $ pip install -e .[dev]
 
 Features
 --------
