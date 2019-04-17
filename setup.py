@@ -62,9 +62,7 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     description="translate brightfield images to and from FISH assay",
-    entry_points={
-        "console_scripts": ["my_example=brightfield2fish.bin.my_example:main"]
-    },
+    entry_points={"console_scripts": []},
     install_requires=requirements,
     license="Allen Institute Software License",
     long_description=readme + "\n\n" + history,
