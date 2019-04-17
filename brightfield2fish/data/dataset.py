@@ -1,5 +1,6 @@
 import warnings
 import numpy as np
+from scipy.ndimage.interpolation import zoom
 import torch
 from torch.utils.data import Dataset
 from aicsimageio import AICSImage
@@ -15,6 +16,7 @@ class FishDataframeDatasetTIFF(Dataset):
         self,
         df,
         channel_content="DNA",
+        resize_original=None,
         random_crop=None,
         math_dtype=np.float64,
         out_dtype=np.float32,
@@ -50,6 +52,7 @@ class FishDataframeDatasetTIFF(Dataset):
             ["Brightfield", "Target"]
         ].reset_index(drop=True)
 
+        self._resize_original = resize_original
         self._random_crop = random_crop
         self._math_dtype = math_dtype
         self._out_dtype = out_dtype
@@ -69,6 +72,14 @@ class FishDataframeDatasetTIFF(Dataset):
             out = {
                 k: AICSImage(row[k]).get_image_data("ZYX")
                 for k in ("Brightfield", "Target")
+            }
+
+        if self._resize_original is not None:
+            out = {
+                k: zoom(v.astype(self._math_dtype), self._resize_original).astype(
+                    self._out_dtype
+                )
+                for k, v in out.items()
             }
 
         out = {
