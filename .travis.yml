@@ -13,4 +13,3 @@ install: pip install -U tox-travis flake8 black
 script:
   - tox
   - flake8 brightfield2fish
-  - black --check brightfield2fish/
