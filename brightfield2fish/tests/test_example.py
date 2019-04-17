@@ -20,4 +20,4 @@ class TestExample(object):
 
     def test_initialize_value(self):
         example = Example(self.START_VALUE)
-        assert (example.get_value() == self.START_VALUE)
+        assert example.get_value() == self.START_VALUE
