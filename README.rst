@@ -6,7 +6,7 @@ brightfield2fish
 .. image:: https://img.shields.io/pypi/v/brightfield2fish.svg
         :target: https://pypi.python.org/pypi/brightfield2fish
 
-.. image:: https://img.shields.io/travis/AllenCellModeling/brightfield2fish.svg
+.. image:: https://travis-ci.com/AllenCellModeling/brightfield2fish.svg?branch=master
         :target: https://travis-ci.com/AllenCellModeling/brightfield2fish
 
 .. image:: https://readthedocs.org/projects/brightfield2fish/badge/?version=latest
