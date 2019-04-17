@@ -14,6 +14,7 @@ with open("HISTORY.rst") as history_file:
 requirements = [
     "numpy",
     "pandas",
+    "scipy",
     "torch>=1.0",
     "torchvision",
     "tqdm",
