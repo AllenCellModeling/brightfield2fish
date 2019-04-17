@@ -96,6 +96,7 @@ Ready to contribute? Here's how to set up `brightfield2fish` for local developme
 3. Install your local copy into an anaconda environment (or virtualenv). Assuming you have `anaconda` installed, this is how you set up your fork for local development::
 
     $ conda create --name brightfield2fish python=3.6
+    $ conda activate brightfield2fish
     $ cd brightfield2fish/
     $ pip install -e .[test]
     $ pip install -e .[dev]
