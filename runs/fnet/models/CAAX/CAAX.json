@@ -1,0 +1,42 @@
+{
+    "batch_size": 28,
+    "bpds_kwargs": {
+        "buffer_size": 8,
+        "buffer_switch_frequency": 2800,
+        "patch_size": [
+            32,
+            64,
+            64
+        ]
+    },
+    "dataset_train": "brightfield2fish.data.dataset.FishDataframeDatasetTIFF",
+    "dataset_train_kwargs": {
+        "df": "/allen/aics/modeling/rorydm/projects/brightfield2fish/data/splits/train.csv",
+        "channel_content": "CAAX",
+        "csv": true
+    },
+    "dataset_val": "brightfield2fish.data.dataset.FishDataframeDatasetTIFF",
+    "dataset_val_kwargs": {
+        "df": "/allen/aics/modeling/rorydm/projects/brightfield2fish/data/splits/train.csv",
+        "channel_content": "CAAX",
+        "csv": true
+    },
+    "fnet_model_class": "fnet.fnet_model.Model",
+    "fnet_model_kwargs": {
+        "betas": [
+            0.9,
+            0.999
+        ],
+        "criterion_class": "torch.nn.MSELoss",
+        "init_weights": false,
+        "lr": 0.001,
+        "nn_class": "fnet.nn_modules.fnet_nn_3d.Net",
+        "scheduler": null
+    },
+    "interval_checkpoint": 500,
+    "interval_save": 250,
+    "iter_checkpoint": [],
+    "n_iter": 1000,
+    "path_save_dir": "saved_models/CAAX",
+    "seed": null
+}
