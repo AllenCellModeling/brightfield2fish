@@ -1,5 +1,6 @@
 import warnings
 import numpy as np
+import pandas as pd
 from scipy.ndimage.interpolation import zoom
 import torch
 from torch.utils.data import Dataset
@@ -15,6 +16,7 @@ class FishDataframeDatasetTIFF(Dataset):
     def __init__(
         self,
         df,
+        csv=False,
         channel_content="DNA",
         resize_original=None,
         random_crop=None,
@@ -29,6 +31,9 @@ class FishDataframeDatasetTIFF(Dataset):
             df (pandas.DataFrame): data_by_channels.csv dataframe output by preprocess_csv.py
             channel_content (str): Name of the ll probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
         """
+
+        if csv:
+            df = pd.read_csv(df)
 
         df_channel = df[df["channel_content"] == channel_content].reset_index(
             drop=True
