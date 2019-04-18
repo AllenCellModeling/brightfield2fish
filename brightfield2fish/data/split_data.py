@@ -14,6 +14,9 @@ def split_and_save(
     df = pd.read_csv(csv_path)
     splits = hashsplit(df[split_col], splits=splits, salt=seed)
 
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
     for k, v in splits.items():
         df_subset = df.iloc[v, :].reset_index(drop=True)
         fname = "{}.csv".format(k)
