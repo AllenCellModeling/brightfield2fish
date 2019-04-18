@@ -1,5 +1,5 @@
 import os
-from brightfield2fish.dataplit_data import split_and_save
+from brightfield2fish.data.split_data import split_and_save
 
 
 def test_split_data():
