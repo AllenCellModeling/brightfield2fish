@@ -9,7 +9,7 @@ python:
   - "3.6"
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis flake8 black
+install: pip install -U tox-travis flake8 black codecov
 
 # Command to run tests, e.g. python setup.py test
 script:

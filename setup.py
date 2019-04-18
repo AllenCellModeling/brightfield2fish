@@ -32,6 +32,7 @@ test_requirements = [
     "flake8>=3.7.7",
     "black>=19.3b0",
     "tox>=3.5.2",
+    "codecov",
     "coverage>=5.0a4",
     "Sphinx>=2.0.0b1",
     "sphinx_rtd_theme",
