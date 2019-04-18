@@ -3,15 +3,18 @@ brightfield2fish
 ================
 
 
-.. image:: https://img.shields.io/pypi/v/brightfield2fish.svg
-        :target: https://pypi.python.org/pypi/brightfield2fish
-
 .. image:: https://travis-ci.com/AllenCellModeling/brightfield2fish.svg?branch=master
         :target: https://travis-ci.com/AllenCellModeling/brightfield2fish
+        
+.. image:: https://codecov.io/gh/AllenCellModeling/brightfield2fish/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/AllenCellModeling/brightfield2fish
 
 .. image:: https://readthedocs.org/projects/brightfield2fish/badge/?version=latest
         :target: https://brightfield2fish.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/v/brightfield2fish.svg
+        :target: https://pypi.python.org/pypi/brightfield2fish
 
 
 translate brightfield images to and from FISH assay
