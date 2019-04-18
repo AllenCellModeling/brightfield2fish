@@ -6,7 +6,7 @@ from pytorch_learning_tools.utils.hashsplit import hashsplit
 def split_and_save(
     csv_path="/allen/aics/modeling/data/brightfield2fish/preprocessed/data_by_images_normalized.csv",
     split_col="file",
-    save_dir="data",
+    save_dir="data/splits",
     splits={"train": 0.7, "valid": 0.15, "test": 0.15},
     seed=0,
 ):
