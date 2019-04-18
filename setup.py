@@ -29,7 +29,6 @@ test_requirements = [
     "pip>=19.0.3",
     "bumpversion>=0.5.3",
     "wheel>=0.33.1",
-    "watchdog>=0.9.0",
     "flake8>=3.7.7",
     "black>=19.3b0",
     "tox>=3.5.2",
@@ -40,7 +39,7 @@ test_requirements = [
     "twine>=1.13.0",
     "jupyterlab>=0.35.4",
     "pytest>=4.3.0",
-    "pytest-cov==2.6.1",
+    "pytest-cov>=2.6.1",
     "pytest-raises>=0.10",
     "pytest-runner>=4.4",
 ]
