@@ -11,8 +11,9 @@ def test_FishDataframeDatasetTIFF():
         "data",
         "data_by_images_normalized.csv",
     )
+
     df = pd.read_csv(csv_path)
 
-    dset = FishDataframeDatasetTIFF(df, channel_content="DNA")
+    dset = FishDataframeDatasetTIFF(csv_path, channel_content="DNA", csv=True)
 
     assert len(dset) == len(df["file"].unique())
