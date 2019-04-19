@@ -10,4 +10,8 @@ def test_split_data():
         "data_by_images_normalized.csv",
     )
 
+    for split in ("train", "test", "valid"):
+        os.remove("data/splits/{}.csv".format(split))
+    os.rmdir("data/splits")
+
     split_and_save(csv_path)
