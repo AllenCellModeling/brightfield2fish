@@ -31,7 +31,7 @@ def test_FishDataframeDatasetTIFF(channel_content="MYL2", split="valid", data="f
         for i, row in dset.df.iterrows():
             for channel in ("Brightfield", "Target"):
                 fpath = os.path.join(fake_tiff_dir, "{0}_{1}.tiff".format(channel, i))
-                df.loc[i, channel] = fpath
+                dset.df.loc[i, channel] = fpath
                 arr = np.random.randint(
                     low=0, high=2 ** 16 - 1, size=(1, 1, 2, 3, 4), dtype=np.uint16
                 )
