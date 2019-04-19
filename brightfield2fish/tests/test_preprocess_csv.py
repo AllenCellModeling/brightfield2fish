@@ -1,6 +1,8 @@
 import os
-from pathlib import Path
+import numpy as np
 import pandas as pd
+
+from aicsimageio import OmeTifWriter
 from brightfield2fish.data.preprocess_csv import find_czis, filter_czis
 
 
@@ -35,7 +37,14 @@ def test_find_and_filter_czis(data="fake"):
                 os.makedirs(directory)
             fake_fname = "5500000007_40X_20181010_2-Scene-17-P27-B04.czi"
             fpath = os.path.join(directory, fake_fname)
-            Path(fpath).touch()
+
+            arr = np.random.randint(
+                low=0, high=2 ** 16 - 1, size=(1, 1, 2, 3, 4), dtype=np.uint16
+            )
+            writer = OmeTifWriter(fpath, overwrite_file=True)
+            writer.save(arr)
+
+            # Path(fpath).touch()
 
     # find the actual czis and filter for ones that are the right shape
     df = find_czis(df)
