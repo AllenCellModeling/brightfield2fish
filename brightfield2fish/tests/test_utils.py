@@ -1,10 +1,12 @@
 import numpy as np
+from aicsimageio import AICSImage, OmeTifWriter
 
 from brightfield2fish.data.utils import (
     normalize_image_zero_one,
     normalize_image_center_scale,
     normalize,
     float_to_uint,
+    prep_fish,
     plot_prepped,
     get_random_crop_3D,
     perform_crop_3D,
@@ -40,10 +42,21 @@ def test_float_to_uint():
     assert np.min(arr_u) == 0 and np.max(arr_u) == 255
 
 
+def test_prep_fish():
+    fpath = "foo.ome.tiff"
+    arr = np.random.randint(
+        low=0, high=2 ** 16 - 1, size=(1, 2, 3, 4, 5), dtype=np.uint16
+    )
+    writer = OmeTifWriter(fpath, overwrite_file=True)
+    writer.save(arr)
+    im = AICSImage(fpath)
+    _ = prep_fish(im)
+
+
 def test_plot_prepped():
     arr = np.random.rand(10, 20, 30)
     arr = normalize(arr, content="Fluor")
-    im = plot_prepped(arr)
+    _ = plot_prepped(arr)
 
 
 def test_get_random_crop_3D():
