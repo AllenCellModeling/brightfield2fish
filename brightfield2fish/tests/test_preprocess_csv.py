@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 from aicsimageio import OmeTifWriter
-from brightfield2fish.data.preprocess_csv import find_czis, filter_czis
+from brightfield2fish.data.preprocess_csv import find_czis, filter_czis, image_shape
 
 
 def test_find_and_filter_czis(data="fake"):
@@ -49,3 +49,13 @@ def test_find_and_filter_czis(data="fake"):
     # find the actual czis and filter for ones that are the right shape
     df = find_czis(df)
     df = filter_czis(df)
+
+
+def test_image_shape():
+    fpath = "foo.ome.tiff"
+    arr = np.random.randint(
+        low=0, high=2 ** 16 - 1, size=(1, 2, 3, 4, 5), dtype=np.uint16
+    )
+    writer = OmeTifWriter(fpath, overwrite_file=True)
+    writer.save(arr)
+    _ = image_shape(fpath)
