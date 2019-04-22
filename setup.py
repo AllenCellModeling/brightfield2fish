@@ -29,6 +29,7 @@ test_requirements = [
     "pip>=19.0.3",
     "bumpversion>=0.5.3",
     "wheel>=0.33.1",
+    "codecov",
     "coverage>=5.0a4",
     "Sphinx>=2.0.0b1",
     "sphinx_rtd_theme",
@@ -42,7 +43,6 @@ test_requirements = [
 dev_requirements = [
     "altair",
     "black",
-    "codecov",
     "flake8",
     "jupyterlab",
     "matplotlib",
