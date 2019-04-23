@@ -33,10 +33,10 @@
         "nn_class": "fnet.nn_modules.fnet_nn_3d.Net",
         "scheduler": null
     },
-    "interval_checkpoint": 500,
-    "interval_save": 250,
+    "interval_checkpoint": 20000,
+    "interval_save": 10000,
     "iter_checkpoint": [],
-    "n_iter": 1000,
+    "n_iter": 100000,
     "path_save_dir": "saved_models/PLN",
     "seed": null
 }
