@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import torch
 from functools import partial
 from PIL import Image
 
@@ -16,6 +17,14 @@ def normalize_image_center_scale(im):
     """im is a np array"""
     im = im - np.mean(im)
     im = im / np.std(im)
+    return im
+
+
+def normalize_image_zero_one_torch(im):
+    """im is a np array"""
+    im = im - torch.min(im)
+    if torch.max(im) > 0:
+        im = im / torch.max(im)
     return im
 
 
