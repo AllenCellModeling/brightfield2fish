@@ -14,12 +14,14 @@ with open("HISTORY.rst") as history_file:
 requirements = [
     "numpy",
     "pandas",
+    "scikit-learn",
     "scipy",
     "torch>=1.0",
     "torchvision",
     "tqdm",
+    "umap",
     "aicsimageio>=0.6.3",
-    "fnet@git+https://github.com/AllenCellModeling/pytorch_fnet@master#egg=fnet",
+    # "fnet@git+https://github.com/AllenCellModeling/pytorch_fnet@master#egg=fnet",
     "pytorch_learning_tools@git+https://github.com/AllenCellModeling/pytorch_learning_tools@master#egg=pytorch_learning_tools",
 ]
 
