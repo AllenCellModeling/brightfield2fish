@@ -1,7 +1,10 @@
 *.ipynb
 notebooks
-runs/fnet/predictions
-runs/fnet/saved_models
+runs/
+data/
+fnet_predictions/
+saved_models_seg/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
