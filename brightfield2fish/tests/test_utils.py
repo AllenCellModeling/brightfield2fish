@@ -1,9 +1,11 @@
 import numpy as np
+import torch
 from aicsimageio import AICSImage, OmeTifWriter
 
 from brightfield2fish.data.utils import (
     normalize_image_zero_one,
     normalize_image_center_scale,
+    normalize_image_zero_one_torch,
     normalize,
     float_to_uint,
     prep_fish,
@@ -18,6 +20,14 @@ def test_normalize_image_zero_one():
     im = np.random.randn(10, 20, 30)
     im_norm = normalize_image_zero_one(im)
     assert np.isclose(np.min(im_norm), 0) and np.isclose(np.max(im_norm), 1)
+
+
+def test_normalize_image_zero_one_torch():
+    im = torch.randn(10, 20, 30)
+    im_norm = normalize_image_zero_one_torch(im)
+    assert np.isclose(np.min(im_norm.numpy()), 0) and np.isclose(
+        np.max(im_norm.numpy()), 1
+    )
 
 
 def test_normalize_image_center_scale():
