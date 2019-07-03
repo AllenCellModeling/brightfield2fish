@@ -3,7 +3,10 @@ import numpy as np
 import pandas as pd
 
 from aicsimageio import OmeTifWriter
-from brightfield2fish.data.dataset import FishDataframeDatasetTIFF
+from brightfield2fish.data.dataset import (
+    FishDataframeDatasetTIFF,
+    FishSegDataframeDatasetTIFF,
+)
 
 
 def test_FishDataframeDatasetTIFF(
@@ -72,7 +75,7 @@ def test_FishSegDataframeDatasetTIFF(
 
     df = pd.read_csv(csv_path)
 
-    dset = FishDataframeDatasetTIFF(
+    dset = FishSegDataframeDatasetTIFF(
         csv_path,
         channel_content=channel_content,
         csv=True,
