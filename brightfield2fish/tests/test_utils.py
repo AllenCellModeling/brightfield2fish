@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import torch
 from aicsimageio import AICSImage, OmeTifWriter
@@ -53,7 +54,7 @@ def test_float_to_uint():
 
 
 def test_prep_fish():
-    fpath = "foo.ome.tiff"
+    fpath = os.path.join("tmp_tests", "foo.ome.tiff")
     arr = np.random.randint(
         low=0, high=2 ** 16 - 1, size=(1, 2, 3, 4, 5), dtype=np.uint16
     )

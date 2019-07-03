@@ -4,7 +4,7 @@ runs/
 data/
 fnet_predictions/
 saved_models_seg/
-
+tmp_tests/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -10,8 +10,12 @@ def test_split_data():
         "data_by_images_normalized.csv",
     )
 
-    for split in ("train", "test", "valid"):
-        os.remove("data/splits/{}.csv".format(split))
-    os.rmdir("data/splits")
+    if os.path.exists(os.path.join("tmp_tests", "data", "splits")):
+        for split in ("train", "test", "valid"):
+            os.remove(
+                os.path.join("tmp_tests", "data", "splits", "{}.csv".format(split))
+            )
+        os.remove(os.path.join("tmp_tests", "data", "splits", "splits.json"))
+        os.rmdir(os.path.join("tmp_tests", "data", "splits"))
 
     split_and_save(csv_path)

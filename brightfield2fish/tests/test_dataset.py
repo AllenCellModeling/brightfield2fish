@@ -39,7 +39,7 @@ def test_FishDataframeDatasetTIFF(
     )
 
     if data == "fake":
-        fake_tiff_dir = "fake_tiffs"
+        fake_tiff_dir = os.path.join("tmp_tests", "fake_tiffs")
         if not os.path.exists(fake_tiff_dir):
             os.makedirs(fake_tiff_dir)
 
@@ -69,7 +69,7 @@ def test_FishSegDataframeDatasetTIFF(
     csv_path = os.path.join(
         os.path.dirname(os.path.dirname(dirname)),
         "data",
-        "splits",
+        "splits_seg",
         "{}.csv".format(split),
     )
 
@@ -83,12 +83,10 @@ def test_FishSegDataframeDatasetTIFF(
         random_crop=random_crop,
     )
 
-    assert len(dset) == len(
-        df[df["channel_content"] == channel_content]["file"].unique()
-    )
+    assert len(dset) == len(df[df["probe name"] == channel_content]["file"].unique())
 
     if data == "fake":
-        fake_tiff_dir = "fake_tiffs"
+        fake_tiff_dir = os.path.join("tmp_tests", "fake_tiffs")
         if not os.path.exists(fake_tiff_dir):
             os.makedirs(fake_tiff_dir)
 

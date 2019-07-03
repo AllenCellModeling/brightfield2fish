@@ -29,7 +29,9 @@ def test_find_and_filter_czis(data="fake"):
         for i, row in df.iterrows():
             df.loc[i, "directory"] = row["directory"].replace(
                 "/allen/aics/microscopy/Data/RnD_Sandbox",
-                os.path.join(os.path.dirname(os.path.dirname(dirname)), "fake_czis"),
+                os.path.join(
+                    os.path.dirname(os.path.dirname(dirname)), "tmp_tests", "fake_czis"
+                ),
             )
 
         for directory in df["directory"].unique():
@@ -44,15 +46,13 @@ def test_find_and_filter_czis(data="fake"):
             writer = OmeTifWriter(fpath, overwrite_file=True)
             writer.save(arr)
 
-            # Path(fpath).touch()
-
     # find the actual czis and filter for ones that are the right shape
     df = find_czis(df)
     df = filter_czis(df)
 
 
 def test_image_shape():
-    fpath = "foo.ome.tiff"
+    fpath = os.path.join("tmp_tests", "foo.ome.tiff")
     arr = np.random.randint(
         low=0, high=2 ** 16 - 1, size=(1, 2, 3, 4, 5), dtype=np.uint16
     )
