@@ -1,12 +1,12 @@
 Welcome to brightfield2fish's documentation!
 ======================================
 
-Brightfield2Fish
+Data
 ----------------
 .. toctree::
    :maxdepth: 3
 
-   brightfield2fish
+   data
 
 
 .. toctree::
