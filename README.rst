@@ -6,8 +6,8 @@ brightfield2fish
 .. image:: https://travis-ci.com/AllenCellModeling/brightfield2fish.svg?branch=master
         :target: https://travis-ci.com/AllenCellModeling/brightfield2fish
 
-.. image:: https://readthedocs.org/projects/plasticnet/badge/?version=latest
-        :target: https://plasticnet.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/brightfield2fish/badge/?version=latest
+        :target: https://brightfield2fish.readthedocs.io/en/latest/?badge=latest
       
 .. image:: https://codecov.io/gh/AllenCellModeling/brightfield2fish/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/AllenCellModeling/brightfield2fish
