@@ -22,7 +22,6 @@ requirements = [
     "umap",
     "aicsimageio>=0.6.3",
     # "fnet@git+https://github.com/AllenCellModeling/pytorch_fnet@master#egg=fnet",
-    "pytorch_learning_tools@git+https://github.com/AllenCellModeling/pytorch_learning_tools@master#egg=pytorch_learning_tools",
 ]
 
 setup_requirements = ["pytest-runner"]
