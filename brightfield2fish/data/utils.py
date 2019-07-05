@@ -6,7 +6,13 @@ from PIL import Image
 
 
 def normalize_image_zero_one(im):
-    """im is a np array"""
+    r"""
+    Normalize an array to have min zero and max one.
+    Args:
+        im (numpy.ndarray): data matrix
+    Returns:
+        (numpy.ndarray): normalized data matrix
+    """
     im = im - np.min(im)
     if np.max(im) > 0:
         im = im / np.max(im)
