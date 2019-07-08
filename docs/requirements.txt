@@ -2,7 +2,6 @@ numpy
 pandas
 scikit-learn
 scipy
-torch>=1.0
 torchvision
 tqdm
 umap
