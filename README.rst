@@ -33,14 +33,3 @@ Installation
     $ pip install -e .[dev]
     $ pre-commit install
 
-Features
---------
-
-* TODO
-
-Credits
--------
-
-This package was created with Cookiecutter_.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
