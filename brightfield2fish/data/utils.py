@@ -8,6 +8,7 @@ from PIL import Image
 def normalize_image_zero_one(im):
     r"""
     Normalize an array to have min zero and max one.
+
     Args:
         im (numpy.ndarray): data matrix
     Returns:
