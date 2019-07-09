@@ -8,15 +8,17 @@ import pandas as pd
 
 def hashsplit(X, splits={"train": 0.8, "test": 0.2}, salt=1, N=5):
     r"""
-    Splits a list of items pseudorandomly (but deterministically) based on the hashes of the items
+    Splits a list of items pseudorandomly (but deterministically) based on the hashes of the items.
 
     Args:
         X (list): list of items to be split into non-overlapping groups
         splits (dict): dict of {name:weight} pairs definiting the desired split
-        salt (string): str(salt) is appended to each list item before hashing
+        salt (str): str(salt) is appended to each list item before hashing
         N (int): number of significant figures to compute for binning each list item
+
     Returns:
-        dict of {name:indices} for all names in the input split dict
+        (dict): {name:indices} for all names in the input split dict
+
     Example:
         >>> hashsplit(list("allen cell institute"), {'train':0.7,'test':0.3}, salt=3, N=8)
         {'test': [4, 12, 17],
