@@ -3,14 +3,14 @@ Welcome to brightfield2fish's documentation!
 
 .. toctree::
    :maxdepth: 3
-   :caption: Documentation:
+   :caption: Documentation
    
    data
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Info:
+   :caption: Info
 
    modules
    contributing
