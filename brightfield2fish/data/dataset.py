@@ -18,8 +18,8 @@ class FishDataframeDatasetTIFF(Dataset):
         channel_content (str): what content to pair with brightfiled, e.g. DNA
         resize_original (float, tuple, or None): if not None, how to resize the original 3D images
         random_crop (tuple, or None): if not None, tuple of z,y,x sizes (in pixels) to which image woll be randomly cropped
-        math_dtype (np.dtype): data type in which internal computations will be done
-        out_dtype (np.dtype): data type that will be output
+        math_dtype (numpy.dtype): data type in which internal computations will be done
+        out_dtype (numpy.dtype): data type that will be output
         output_torch (boool): if True, output a torch.tensor rather than a np.array
         channel_dim (bool): if True, include a singleton channel dimension for output 3D images
         return_tuple (bool): if True, return images as (brightfield, target), else return as a dict
@@ -125,8 +125,8 @@ class FishSegDataframeDatasetTIFF(Dataset):
         channel_content (str): what content to pair with brightfiled, e.g. DNA
         resize_original (float, tuple, or None): if not None, how to resize the original 3D images
         random_crop (tuple, or None): if not None, tuple of z,y,x sizes (in pixels) to which image woll be randomly cropped
-        math_dtype (np.dtype): data type in which internal computations will be done
-        out_dtype (np.dtype): data type that will be output
+        math_dtype (numpy.dtype): data type in which internal computations will be done
+        out_dtype (numpy.dtype): data type that will be output
         output_torch (boool): if True, output a torch.tensor rather than a np.array
         channel_dim (bool): if True, include a singleton channel dimension for output 3D images
         return_tuple (bool): if True, return images as (brightfield, target), else return as a dict
