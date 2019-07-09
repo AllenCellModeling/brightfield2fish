@@ -1,11 +1,17 @@
 .. highlight:: shell
 
-======================================
-Allen Institute Contribution Agreement
-======================================
+============
+Contributing
+============
 
-Terms
-----------------
+Contributions are welcome, and they are greatly appreciated! Every little bit
+helps, and credit will always be given.
+
+You can contribute in many ways:
+
+Allen Institute Contribution Agreement
+--------------------------------------
+
 This document describes the terms under which you may make “Contributions” —
 which may include without limitation, software additions, revisions, bug fixes, configuration changes,
 documentation, or any other materials — to any of the projects owned or managed by the Allen Institute.
@@ -29,15 +35,6 @@ You certify that:
   a record of the Contributions (including all metadata and personal information you submit with them) is
   maintained indefinitely and may be redistributed consistent with the Allen Institute’s mission and the
   2-Clause BSD license.
-
-============
-Contributing
-============
-
-Contributions are welcome, and they are greatly appreciated! Every little bit
-helps, and credit will always be given.
-
-You can contribute in many ways:
 
 Types of Contributions
 ----------------------
