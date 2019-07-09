@@ -1,7 +1,7 @@
 Welcome to brightfield2fish's documentation!
 ======================================
 
-Data
+Documentation
 ----------------
 .. toctree::
    :maxdepth: 3
@@ -11,11 +11,9 @@ Data
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
+   :caption: Info:
 
    readme
-   installation
-   usage
    modules
    contributing
    authors
