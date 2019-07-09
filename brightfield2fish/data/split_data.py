@@ -7,12 +7,12 @@ import pandas as pd
 
 
 def hashsplit(X, splits={"train": 0.8, "test": 0.2}, salt=1, N=5):
-    """
+    r"""
     Splits a list of items pseudorandomly (but deterministically) based on the hashes of the items
 
     Args:
         X (list): list of items to be split into non-overlapping groups
-        splits = (dict): dict of {name:weight} pairs definiting the desired split
+        splits (dict): dict of {name:weight} pairs definiting the desired split
         salt (string): str(salt) is appended to each list item before hashing
         N (int): number of significant figures to compute for binning each list item
     Returns:
@@ -57,6 +57,18 @@ def split_and_save(
     splits={"train": 0.7, "valid": 0.15, "test": 0.15},
     seed=0,
 ):
+
+    r"""
+    Split a csv dataset and save the splits and indices to disk.
+
+    Args:
+        csv_name (str): csv to be split into non-overlapping groups
+        csv_dir (str): path to directory in which csv resides
+        split_col (str): column to use as id for splitting into groups
+        save_dir (str): path to directory where split csvs and indices should be saved
+        splits (dict): dict of {name:size} by which to split data
+        seed (int): salt fir the hash fuction that does the splitting
+    """
 
     df = pd.read_csv(os.path.join(csv_dir, csv_name))
     splits = hashsplit(df[split_col], splits=splits, salt=seed)
