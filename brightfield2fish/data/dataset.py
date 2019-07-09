@@ -9,7 +9,7 @@ from brightfield2fish.data.utils import RandomCrop3D, normalize
 
 
 class FishDataframeDatasetTIFF(Dataset):
-    """
+    r"""
     Dataset class for Brghtfield -> FISH prediction that reads single channel tiffs.
     """
 
@@ -26,7 +26,7 @@ class FishDataframeDatasetTIFF(Dataset):
         channel_dim=True,
         return_tuple=True,
     ):
-        """
+        r"""
         Args:
             df (pandas.DataFrame): data_by_channels.csv dataframe output by preprocess_csv.py
             channel_content (str): Name of the ll probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
@@ -109,7 +109,7 @@ class FishDataframeDatasetTIFF(Dataset):
 
 
 class FishSegDataframeDatasetTIFF(Dataset):
-    """
+    r"""
     Dataset class for Brghtfield -> FISH prediction that reads in 3D tiffs for inputs and 2d fish segs for targets.
     Extrudes the 2d data along z for image to image prediction task.
     """
@@ -130,7 +130,7 @@ class FishSegDataframeDatasetTIFF(Dataset):
         bf_clip_percentiles=[0.01, 99.99],
         normalize=True,
     ):
-        """
+        r"""
         Args:
             df (pandas.DataFrame): data_by_images_with_fish_segmentations.csv dataframe output by preprocess_fish_segs.py
             channel_content (str): Name of the ll probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
