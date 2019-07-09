@@ -1,11 +1,10 @@
 Welcome to brightfield2fish's documentation!
-======================================
+============================================
 
-Documentation
-----------------
 .. toctree::
    :maxdepth: 3
-
+   :caption: Documentation:
+   
    data
 
 
@@ -17,6 +16,7 @@ Documentation
    contributing
    authors
    history
+
 
 Indices and tables
 ==================
