@@ -7,7 +7,7 @@ from PIL import Image
 
 def normalize_image_zero_one(im):
     r"""
-    Normalize an array to have min zero and max one.
+    Normalize a Numpy array to have min zero and max one.
 
     Args:
         im (numpy.ndarray): data matrix
@@ -21,14 +21,28 @@ def normalize_image_zero_one(im):
 
 
 def normalize_image_center_scale(im):
-    """im is a np array"""
+    r"""
+    Normalize a Numpy array to have mean zero and variance one.
+
+    Args:
+        im (numpy.ndarray): data matrix
+    Returns:
+        (numpy.ndarray): normalized data matrix
+    """
     im = im - np.mean(im)
     im = im / np.std(im)
     return im
 
 
 def normalize_image_zero_one_torch(im):
-    """im is a np array"""
+    r"""
+    Normalize a Pytorch array to have min zero and max one.
+
+    Args:
+        im (torch.tensor): data matrix
+    Returns:
+        (torch.tensor): normalized data matrix
+    """
     im = im - torch.min(im)
     if torch.max(im) > 0:
         im = im / torch.max(im)
