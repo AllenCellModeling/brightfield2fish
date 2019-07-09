@@ -118,6 +118,7 @@ class FishSegDataframeDatasetTIFF(Dataset):
     r"""
     Dataset class for Brghtfield -> FISH prediction that reads in 3D tiffs for inputs and 2d fish segs for targets.
     Extrudes the 2d data along z for image to image prediction task.
+
     Args:
         df (pd.DataFrame): input dataframe that specifies dataset
         csv (bool): if True, accept a csv file path rahter than a DataFrame
