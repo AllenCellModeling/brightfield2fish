@@ -118,6 +118,20 @@ class FishSegDataframeDatasetTIFF(Dataset):
     r"""
     Dataset class for Brghtfield -> FISH prediction that reads in 3D tiffs for inputs and 2d fish segs for targets.
     Extrudes the 2d data along z for image to image prediction task.
+    Args:
+        df (pd.DataFrame): input dataframe that specifies dataset
+        csv (bool): if True, accept a csv file path rahter than a DataFrame
+        channel_content (str): what content to pair with brightfiled, e.g. DNA
+        resize_original (float, tuple, or None): if not None, how to resize the original 3D images
+        random_crop (tuple, or None): if not None, tuple of z,y,x sizes (in pixels) to which image woll be randomly cropped
+        math_dtype (np.dtype): data type in which internal computations will be done
+        out_dtype (np.dtype): data type that will be output
+        output_torch (boool): if True, output a torch.tensor rather than a np.array
+        channel_dim (bool): if True, include a singleton channel dimension for output 3D images
+        return_tuple (bool): if True, return images as (brightfield, target), else return as a dict
+        fish_3d (bool): if True, return fish image as 3D, extruded along z axis
+        bf_clip_percentiles (list): lower and upper percentiales of pixel intesity at which to clip the brightfield image
+        normalize (bool): if True, normalize the brightfield image to zero mean and unit varinace, and normalize the fish image to min zero and max one
     """
 
     def __init__(
@@ -136,11 +150,6 @@ class FishSegDataframeDatasetTIFF(Dataset):
         bf_clip_percentiles=[0.01, 99.99],
         normalize=True,
     ):
-        r"""
-        Args:
-            df (pandas.DataFrame): data_by_images_with_fish_segmentations.csv dataframe output by preprocess_fish_segs.py
-            channel_content (str): Name of the ll probe we want to predict from Brightfield, e.g. "DNA", "BMPER", etc
-        """
 
         if csv:
             df = pd.read_csv(df)
