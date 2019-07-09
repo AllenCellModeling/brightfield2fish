@@ -3,5 +3,3 @@ pandas
 scikit-learn
 scipy
 tqdm
-umap
-tifffile
