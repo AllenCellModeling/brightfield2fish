@@ -36,12 +36,12 @@ def normalize_image_center_scale(im):
 
 def normalize_image_zero_one_torch(im):
     r"""
-    Normalize a Pytorch array to have min zero and max one.
+    Normalize a Pytorch tensor to have min zero and max one.
 
     Args:
-        im (torch.tensor): data matrix
+        im (torch.Tensor): data matrix
     Returns:
-        (torch.tensor): normalized data matrix
+        (torch.Tensor): normalized data matrix
     """
     im = im - torch.min(im)
     if torch.max(im) > 0:
@@ -50,6 +50,15 @@ def normalize_image_zero_one_torch(im):
 
 
 def normalize(im, content="Brightfield"):
+    r"""
+    Normalize a numpy array to either have min zero and max one, or mean zero and unit variaince, depending on the `content` arg.
+
+    Args:
+        im (numpy.ndarray): data matrix
+        content (str): content of the image to normalize.  If `content="Brightfield"`, normalize to mean zero and unit variaince, else normalize to min zero and max one.
+    Returns:
+        (numpy.ndarray): normalized data matrix
+    """
     return (
         normalize_image_center_scale(im)
         if content == "Brightfield"
@@ -58,7 +67,15 @@ def normalize(im, content="Brightfield"):
 
 
 def float_to_uint(im, uint_dtype=np.uint8):
-    """im is a np array"""
+    r"""
+    Convert an array of floats to unsigned ints, contrast stretrching so to the dynamic range of the output data type.
+
+    Args:
+        im (numpy.ndarray): data matrix
+        uint_dtype (numpy.dtype): numpy data type e.g. np.uint8
+    Returns:
+        (numpy.ndarray): nteger data matrix
+    """
     imax = np.iinfo(uint_dtype).max + 1  # eg imax = 256 for uint8
     im = im * imax
     im[im == imax] = imax - 1
