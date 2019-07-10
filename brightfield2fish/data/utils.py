@@ -124,7 +124,8 @@ def prep_fish(
 
 def plot_prepped(img3d, reduce_3D_to_2D=partial(np.percentile, q=100, axis=0)):
     r"""
-    Plots a 2D projection of a 3D image by reutning a PIL Image object
+    Plots a 2D projection of a 3D image by returning a PIL Image object.
+
     Args:
         img3d (numpy.ndarray): data array, prepped and normalized
         reduce_3D_to_2D (functools.partial): function for converting a 3D image to a 2D image, e.g. functools.partial(np.percentile, q=99, axis=0)
