@@ -177,6 +177,7 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/", None),
     "numpy": ("http://docs.scipy.org/doc/numpy/", None),
     "PyTorch": ("http://pytorch.org/docs/master/", None),
+    "Pillow": ("https://pillow.readthedocs.io/en/stable/", None),
 }
 
 # -- A patch that prevents Sphinx from cross-referencing ivar tags --------
