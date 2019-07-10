@@ -51,7 +51,7 @@ def normalize_image_zero_one_torch(im):
 
 def normalize(im, content="Brightfield"):
     r"""
-    Normalize a numpy array to either have min zero and max one, or mean zero and unit variaince, depending on the `content` arg.
+    Normalize a numpy array to either have min zero and max one, or mean zero and unit variance, depending on the `content` arg.
 
     Args:
         im (numpy.ndarray): data matrix
@@ -74,7 +74,7 @@ def float_to_uint(im, uint_dtype=np.uint8):
         im (numpy.ndarray): data matrix
         uint_dtype (numpy.dtype): numpy data type e.g. np.uint8
     Returns:
-        (numpy.ndarray): nteger data matrix
+        (numpy.ndarray): integer data matrix
     """
     imax = np.iinfo(uint_dtype).max + 1  # eg imax = 256 for uint8
     im = im * imax
@@ -92,7 +92,20 @@ def prep_fish(
     math_dtype=np.float64,
     out_dtype=np.uint16,
 ):
-    """image is an AICSImage object"""
+    r"""
+    Normalize a Numpy array to have min zero and max one.
+
+    Args:
+        image (aicsimageio.Image): input image object
+        channel (int): channel to select for prep
+        T (int): time point to select for prep
+        clip_percentiles (list): min and max pixel values at which to clip image signal
+        median_subtract (bool): if True, set all pixels below the median value to zero
+        math_dtype (numpy.dtype): numpy dtype in which internal computations are performed
+        out_dtype (numpy.dtype): numpy dtype in for output array
+    Returns:
+        (numpy.ndarray): normalized data single channel 3D array
+    """
     img3d = image.get_image_data("ZYX", T=T, C=channel)
     img3d = img3d.astype(math_dtype)
     img3d = np.clip(
