@@ -96,7 +96,7 @@ def prep_fish(
     Normalize a Numpy array to have min zero and max one.
 
     Args:
-        image (aicsimageio.Image): input image object
+        image (aicsimageio.AICSImage): input image object
         channel (int): channel to select for prep
         T (int): time point to select for prep
         clip_percentiles (list): min and max pixel values at which to clip image signal
@@ -123,7 +123,14 @@ def prep_fish(
 
 
 def plot_prepped(img3d, reduce_3D_to_2D=partial(np.percentile, q=100, axis=0)):
-    """img3d a 3d np array, eg the output of prep_fish"""
+    r"""
+    Plots a 2D projection of a 3D image by reutning a PIL Image object
+    Args:
+        img3d (numpy.ndarray): data array, prepped and normalized
+        reduce_3D_to_2D (functools.partial): function for converting a 3D image to a 2D image, e.g. functools.partial(np.percentile, q=99, axis=0)
+    Returns:
+        (PIL.Image): single channel PIL.Image
+    """
     img2d = reduce_3D_to_2D(img3d)
     img2d = float_to_uint(img2d)
     return Image.fromarray(img2d, "L")
