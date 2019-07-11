@@ -11,8 +11,6 @@ from brightfield2fish.data.utils import (
     float_to_uint,
     prep_fish,
     plot_prepped,
-    get_random_crop_3D,
-    perform_crop_3D,
     RandomCrop3D,
 )
 
@@ -70,23 +68,9 @@ def test_plot_prepped():
     _ = plot_prepped(arr)
 
 
-def test_get_random_crop_3D():
-    arr = np.random.randn(10, 20, 30)
-    zlims, ylims, xlims = get_random_crop_3D(arr, 5, 10, 15)
-    assert zlims[0] >= 0 and zlims[1] <= 10 and zlims[1] - zlims[0] == 5
-    assert ylims[0] >= 0 and ylims[1] <= 20 and ylims[1] - ylims[0] == 10
-    assert xlims[0] >= 0 and xlims[1] <= 30 and xlims[1] - xlims[0] == 15
-
-
-def test_perform_crop_3D():
-    arr = np.random.randn(10, 20, 30)
-    arr_crop = perform_crop_3D(arr, [1, 3], [2, 5], [3, 7])
-    assert arr_crop.shape == (2, 3, 4)
-
-
 def test_RandomCrop3D():
     arr = np.random.randn(10, 20, 30)
     arr2 = np.random.randn(10, 20, 30)
-    rc = RandomCrop3D(arr, 2, 3, 4)
+    rc = RandomCrop3D(arr, (2, 3, 4))
     arr_crop = rc.crop(arr2)
     assert arr_crop.shape == (2, 3, 4)
