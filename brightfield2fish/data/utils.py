@@ -144,17 +144,13 @@ class RandomCrop:
     Args:
         array (numpy.ndarray): numpy array whose size and shape will be used in selecting a random region to crop
         crop_size (tuple): tuple of ints of length array.ndim, e.g. (z,y,x) for 3D, specifying the size of the region to select for cropping within the bounds set by array.shape
+
     Example:
-        Examples can be given using either the ``Example`` or ``Examples``
-        sections. Sections support any reStructuredText formatting, including
-        literal blocks::
-
-            $ A = np.random.randn(10,20,30)
-            $ B = A + 1
-
-            $ crop_size = (5,10,15)
-            $ rc = RandomCrop3D(A, crop_size)
-            $ B_cropped = rc.crop(B)
+        >>> A = np.random.randn(10,20,30)
+        >>> B = A + 1
+        >>> crop_size = (5,10,15)
+        >>> rc = RandomCrop3D(A, crop_size)
+        >>> B_cropped = rc.crop(B)
 
     """
 
