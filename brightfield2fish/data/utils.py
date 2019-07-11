@@ -138,14 +138,15 @@ def plot_prepped(img3d, reduce_3D_to_2D=partial(np.percentile, q=100, axis=0)):
 
 
 class RandomCrop3D:
-    def __init__(self, array, crop_size):
-        r"""
-        Takes an input 3D image array and randomly sets a crop region of size crop_size. Can then apply that specific random crop to other images with the crop method.  Useful for data augmentation on paired images.
+    r"""
+    Takes an input 3D image array and randomly sets a crop region of size crop_size. Can then apply that specific random crop to other images with the crop method.  Useful for data augmentation on paired images.
 
-        Args:
-            array (numpy.ndarray): three dimensional array whose size will be used in selecting a random region to crop
-            crop_size (tuple): tuple of ints (z,y,x) specifying the size of the region to select for cropping within the bounds set by array.shape
+    Args:
+        array (numpy.ndarray): three dimensional array whose size will be used in selecting a random region to crop
+        crop_size (tuple): tuple of ints (z,y,x) specifying the size of the region to select for cropping within the bounds set by array.shape
         """
+
+    def __init__(self, array, crop_size):
         z_size, y_size, x_size = crop_size
 
         z_0 = random.randint(0, array.shape[0] - z_size)
