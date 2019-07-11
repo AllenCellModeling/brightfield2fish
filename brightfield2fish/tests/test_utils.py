@@ -11,7 +11,7 @@ from brightfield2fish.data.utils import (
     float_to_uint,
     prep_fish,
     plot_prepped,
-    RandomCrop3D,
+    RandomCrop,
 )
 
 
@@ -68,13 +68,13 @@ def test_plot_prepped():
     _ = plot_prepped(arr)
 
 
-def test_RandomCrop3D():
+def test_RandomCrop():
 
     A = np.random.randn(10, 20, 30)
     B = A + 1
 
     crop_size = (5, 10, 15)
-    rc = RandomCrop3D(A, crop_size)
+    rc = RandomCrop(A, crop_size)
 
     assert rc.crop(A).shape == crop_size
     assert np.allclose(rc.crop(B) - rc.crop(A), 1)

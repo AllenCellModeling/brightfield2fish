@@ -137,31 +137,26 @@ def plot_prepped(img3d, reduce_3D_to_2D=partial(np.percentile, q=100, axis=0)):
     return Image.fromarray(img2d, "L")
 
 
-class RandomCrop3D:
+class RandomCrop:
     r"""
-    Takes an input 3D image array and randomly sets a crop region of size crop_size. Can then apply that specific random crop to other images with the crop method.  Useful for data augmentation on paired images.
+    Takes an input  numpy array (e.g. a 3D image) and randomly sets a crop region of size crop_size. Can then apply that specific random crop to other images with the crop method.  Useful for data augmentation on paired images.
 
     Args:
-        array (numpy.ndarray): three dimensional array whose size will be used in selecting a random region to crop
-        crop_size (tuple): tuple of ints (z,y,x) specifying the size of the region to select for cropping within the bounds set by array.shape
+        array (numpy.ndarray): numpy array whose size and shape will be used in selecting a random region to crop
+        crop_size (tuple): tuple of ints of length array.ndim, e.g. (z,y,x) for 3D, specifying the size of the region to select for cropping within the bounds set by array.shape
         """
 
     def __init__(self, array, crop_size):
-        z_size, y_size, x_size = crop_size
-
-        z_0 = random.randint(0, array.shape[0] - z_size)
-        y_0 = random.randint(0, array.shape[1] - y_size)
-        x_0 = random.randint(0, array.shape[2] - x_size)
-
-        self.slice = np.s_[z_0 : z_0 + z_size, y_0 : y_0 + y_size, x_0 : x_0 + x_size]
+        start = [random.randint(0, s - c) for s, c in zip(array.shape, crop_size)]
+        self.slice = tuple(slice(s, s + c) for s, c in zip(start, crop_size))
 
     def crop(self, X):
         r"""
-        Perform random crop on a new image.
+        Perform random crop on a new data array.
 
         Args:
-            X (numpy.ndarray): Image to crop
+            X (numpy.ndarray): array to crop, same size as the array used to initialize the RandomCrop object
         Returns:
-            (numpy.ndarray): cropped image
+            (numpy.ndarray): cropped array
         """
         return X[self.slice]

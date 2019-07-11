@@ -5,7 +5,7 @@ from scipy.ndimage.interpolation import zoom
 import torch
 from torch.utils.data import Dataset
 from aicsimageio import AICSImage
-from brightfield2fish.data.utils import RandomCrop3D, normalize
+from brightfield2fish.data.utils import RandomCrop, normalize
 
 
 class FishDataframeDatasetTIFF(Dataset):
@@ -99,7 +99,7 @@ class FishDataframeDatasetTIFF(Dataset):
         }
 
         if self._random_crop is not None:
-            randomcropper = RandomCrop3D(out["Brightfield"], self._random_crop)
+            randomcropper = RandomCrop(out["Brightfield"], self._random_crop)
             out = {k: randomcropper.crop(v) for k, v in out.items()}
 
         if self._output_torch:
@@ -218,7 +218,7 @@ class FishSegDataframeDatasetTIFF(Dataset):
             out = {k: normalize(v, content=k) for k, v in out.items()}
 
         if self._random_crop is not None:
-            randomcropper = RandomCrop3D(out["Brightfield"], self._random_crop)
+            randomcropper = RandomCrop(out["Brightfield"], self._random_crop)
             out = {k: randomcropper.crop(v) for k, v in out.items()}
 
         if self._output_torch:
