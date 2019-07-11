@@ -69,8 +69,12 @@ def test_plot_prepped():
 
 
 def test_RandomCrop3D():
-    arr = np.random.randn(10, 20, 30)
-    arr2 = np.random.randn(10, 20, 30)
-    rc = RandomCrop3D(arr, (2, 3, 4))
-    arr_crop = rc.crop(arr2)
-    assert arr_crop.shape == (2, 3, 4)
+
+    A = np.random.randn(10, 20, 30)
+    B = A + 1
+
+    crop_size = (5, 10, 15)
+    rc = RandomCrop3D(A, crop_size)
+
+    assert rc.crop(A).shape == crop_size
+    assert np.allclose(rc.crop(B) - rc.crop(A), 1)
