@@ -12,7 +12,6 @@ Welcome to brightfield2fish's documentation!
    :maxdepth: 1
    :caption: Info
 
-   modules
    contributing
    authors
    history
