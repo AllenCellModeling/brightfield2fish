@@ -20,7 +20,7 @@ requirements = [
     "torchvision",
     "tqdm",
     "umap",
-    "aicsimageio>=0.6.3",
+    "aicsimageio>=0.6.3,<3.0.0",
     # "fnet@git+https://github.com/AllenCellModeling/pytorch_fnet@master#egg=fnet",
 ]
 
