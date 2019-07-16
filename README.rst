@@ -13,7 +13,7 @@ brightfield2fish
         :target: https://codecov.io/gh/AllenCellModeling/brightfield2fish
 
 
-translate brightfield images to and from FISH assay
+Translate brightfield images to and from FISH assay
 
 
 * Free software: Allen Institute Software License
