@@ -4,17 +4,19 @@ dist: xenial
 
 language: python
 
-cache: pip
-
-before_cache:
-  - rm -f $HOME/.cache/pip/log/debug.log
-  - rm -rf $HOME/.cache/pip/http
-
 python:
   - "3.7"
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U tox-travis flake8 black codecov
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+  - rm -rf $HOME/.cache/pip/http
 
 # Command to run tests, e.g. python setup.py test
 script:
