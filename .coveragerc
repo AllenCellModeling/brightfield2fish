@@ -1,5 +1,5 @@
 [run]
-source=plasticnet
+source=brightfield2fish
 
 [report]
 exclude_lines =
