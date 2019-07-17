@@ -86,7 +86,7 @@ pygments_style = "sphinx"
 todo_include_todos = False
 
 # Exclude imports
-autodoc_mock_imports = ["torch", "torchvision", "aicsimageio", "tifffile", "umap"]
+autodoc_mock_imports = ["torch", "aicsimageio"]
 
 # -- Options for HTML output -------------------------------------------
 
